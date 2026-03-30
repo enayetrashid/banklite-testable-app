@@ -20,3 +20,7 @@ def dashboard_page():
 @web_bp.route("/deposit")
 def deposit_page():
     return render_template("deposit.html")
+
+@web_bp.route("/withdraw")
+def withdraw_page():
+    return render_template("withdraw.html")
