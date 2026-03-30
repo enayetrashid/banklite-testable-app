@@ -12,3 +12,7 @@ def home():
 @web_bp.route("/login")
 def login_page():
     return render_template("login.html")
+
+@web_bp.route("/dashboard")
+def dashboard_page():
+    return render_template("dashboard.html")
