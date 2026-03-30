@@ -143,3 +143,19 @@ def api_transfer(account_id):
     ), 200
 
 
+@api_bp.route("/accounts/<account_id>/transactions", methods=["GET"])
+def api_transactions(account_id):
+    storage = get_storage()
+    username, user = storage.get_user_by_account_id(account_id)
+
+    if user is None:
+        return jsonify({"success": False, "message": "Account was not found."}), 404
+
+    transactions = get_transactions(storage, username)
+    return jsonify(
+        {
+            "success": True,
+            "account_id": account_id,
+            "transactions": transactions,
+        }
+    ), 200

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Transaction History</h2>
+<table id="transactions-table" class="hidden">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody id="transactions-body"></tbody>
+</table>
+<p id="empty-state">No transactions available yet.</p>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/transactions.js') }}"></script>
+{% endblock %}
