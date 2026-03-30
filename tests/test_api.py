@@ -11,3 +11,14 @@ def test_login_api_returns_success_for_valid_user():
     )
 
     assert response.status_code == 200
+
+
+def test_balance_api_returns_current_balance():
+    app = create_app()
+    client = app.test_client()
+
+    response = client.get("/api/accounts/A1001/balance")
+    data = response.get_json()
+
+    assert response.status_code == 200
+    assert data["balance"] == 1000.0

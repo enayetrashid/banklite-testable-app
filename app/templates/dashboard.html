@@ -1,5 +1,15 @@
 {% extends "base.html" %}
+
 {% block content %}
 <h2>Dashboard</h2>
-<p>Dashboard placeholder for next step.</p>
+<div class="card">
+    <p><strong>Username:</strong> <span id="username-value">-</span></p>
+    <p><strong>Full name:</strong> <span id="full-name-value">-</span></p>
+    <p><strong>Account ID:</strong> <span id="account-id-value">-</span></p>
+    <p><strong>Current balance:</strong> <span id="balance-value">-</span></p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %}

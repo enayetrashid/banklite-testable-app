@@ -42,3 +42,23 @@ def api_login():
     ), 200
 
 
+@api_bp.route("/accounts/<account_id>/balance", methods=["GET"])
+def api_balance(account_id):
+    storage = get_storage()
+    username, user = storage.get_user_by_account_id(account_id)
+
+    if user is None:
+        return jsonify({"success": False, "message": "Account was not found."}), 404
+
+    balance = get_balance(storage, username)
+    return jsonify(
+        {
+            "success": True,
+            "account_id": account_id,
+            "username": username,
+            "full_name": user["full_name"],
+            "balance": balance,
+        }
+    ), 200
+
+
