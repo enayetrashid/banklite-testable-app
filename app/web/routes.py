@@ -16,3 +16,7 @@ def login_page():
 @web_bp.route("/dashboard")
 def dashboard_page():
     return render_template("dashboard.html")
+
+@web_bp.route("/deposit")
+def deposit_page():
+    return render_template("deposit.html")

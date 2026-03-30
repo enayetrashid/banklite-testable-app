@@ -62,3 +62,27 @@ def api_balance(account_id):
     ), 200
 
 
+@api_bp.route("/accounts/<account_id>/deposit", methods=["POST"])
+def api_deposit(account_id):
+    data = request.get_json(silent=True) or {}
+    amount_text = data.get("amount", "")
+
+    storage = get_storage()
+    username, user = storage.get_user_by_account_id(account_id)
+
+    if user is None:
+        return jsonify({"success": False, "message": "Account was not found."}), 404
+
+    new_balance, error_message = deposit_money(storage, username, amount_text)
+    if error_message is not None:
+        return jsonify({"success": False, "message": error_message}), 400
+
+    return jsonify(
+        {
+            "success": True,
+            "account_id": account_id,
+            "new_balance": new_balance,
+        }
+    ), 200
+
+
