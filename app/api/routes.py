@@ -110,3 +110,36 @@ def api_withdraw(account_id):
     ), 200
 
 
+@api_bp.route("/accounts/<account_id>/transfer", methods=["POST"])
+def api_transfer(account_id):
+    data = request.get_json(silent=True) or {}
+    target_account_id = str(data.get("target_account_id", "")).strip()
+    amount_text = data.get("amount", "")
+
+    storage = get_storage()
+    username, user = storage.get_user_by_account_id(account_id)
+
+    if user is None:
+        return jsonify({"success": False, "message": "Account was not found."}), 404
+
+    if target_account_id == "":
+        return jsonify({"success": False, "message": "Target account is required."}), 400
+
+    new_balance, error_message = transfer_money(
+        storage,
+        username,
+        target_account_id,
+        amount_text,
+    )
+    if error_message is not None:
+        return jsonify({"success": False, "message": error_message}), 400
+
+    return jsonify(
+        {
+            "success": True,
+            "account_id": account_id,
+            "new_balance": new_balance,
+        }
+    ), 200
+
+

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Transfer</h2>
+<form id="transfer-form">
+    <label for="target_account_id">Target Account ID</label>
+    <input id="target_account_id" name="target_account_id" type="text">
+
+    <label for="amount">Amount</label>
+    <input id="amount" name="amount" type="text">
+
+    <button type="submit">Transfer</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/transfer.js') }}"></script>
+{% endblock %}

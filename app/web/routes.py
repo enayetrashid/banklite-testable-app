@@ -24,3 +24,7 @@ def deposit_page():
 @web_bp.route("/withdraw")
 def withdraw_page():
     return render_template("withdraw.html")
+
+@web_bp.route("/transfer")
+def transfer_page():
+    return render_template("transfer.html")
